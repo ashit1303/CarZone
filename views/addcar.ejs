@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title><%= pageTitle %></title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!-- Custom Theme files -->
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+   <!-- <meta name="keywords" content="Ramble Responsive web template, Bootstrap Web Templates, Flat Web Templates, Compatible web template" />-->
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!--animate-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="assets/js/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+
+    <div class="header">
+
+</div>
+<% include partials/navbar.ejs %>
+
+ 
+
+
+
+        
+
+<!--navigation-->
+    <script>
+    $(document).ready(function () {
+      setTimeout(function () {
+        $("#allAlert").css("display", "none");
+      }, 7000);
+    });
+  </script>
+
+    <main>
+        <% if (currentUser.username) { %>
+        <div class="has-warning warner text-center" id="allAlert"><a class="<%= path === '/cart' ? 'active' : '' %>"><%= currentUser.username %></a></div>
+        <% } %>
+        <% if (errorMessage) { %>
+            <div class="has-warning warner text-center" id="allAlert"><%= errorMessage %></div>
+        <% } %>
+
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    
+                    <div class="signup-form">
+                        <h2 class="form-title">Add New CAR</h2>
+
+        <form class="register-form" action="/<% if (editing) { %>edit-product<% } else { %>add-cars<% } %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="title" 
+                    id="title" 
+                    value="<% if (editing || hasError) { %><%= product.title %><% } %>">
+            </div>
+            <!-- <div class="form-control">
+                <label for="imageUrl">Image URL</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'imageUrl') ? 'invalid' : '' %>"
+                    type="text" 
+                    name="imageUrl" 
+                    id="imageUrl" 
+                    value="<% if (editing || hasError) { %><%= product.imageUrl %><% } %>">
+            </div> -->
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input 
+                    type="file" 
+                    name="image" 
+                    id="image" >
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input 
+                    class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>"
+                    type="number" 
+                    name="price" 
+                    id="price" 
+                    step="0.01" 
+                    value="<% if (editing || hasError) { %><%= product.price %><% } %>">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea 
+                    class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
+                    name="description" 
+                    id="description" 
+                    rows="5"><% if (editing || hasError) { %><%= product.description %><% } %></textarea>
+            </div>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= product._id %>" name="productId">
+            <% } %>
+
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="form-group form-button">
+            <button class="btn-success" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Product<% } %></button>
+</div>
+
+            </div>
+        </form>
+
+</div>
+
+</div>
+</section>
+    </main>
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

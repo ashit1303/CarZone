@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title><%= pageTitle %></title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+        <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!-- Custom Theme files -->
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+   <!-- <meta name="keywords" content="Ramble Responsive web template, Bootstrap Web Templates, Flat Web Templates, Compatible web template" />-->
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!--animate-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="assets/js/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+</head>
+<body>
+        <% include partials/navbar.ejs %>
+
+  <script>
+    
+    $(document).ready(function () {
+      setTimeout(function () {
+        $("#allAlert").css("display", "none");
+      }, 7000);
+    });
+  </script>
+        <% if (errorMessage) { %>
+            <div class="has-warning warner text-center" id="allAlert"><%= errorMessage %></div>
+        <% } %>
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign Up</h2>
+                        <form method="POST" class="register-form" id="register-form" action="/signup">
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input required type="username" name="username" id="username" placeholder="Your Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" type="email" name="email" id="email" value="<%= oldInput.email %>" placeholder="Your Email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input class="<%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>" type="password" name="password" id="password" value="<%= oldInput.password %>" placeholder="Password" />
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input class="<%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>" type="password" name="confirmPassword" id="confirmPassword" value="<%= oldInput.confirmPassword %>" placeholder="Confirm password"/>
+                            </div>
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signin" class="btn-success" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="images/car1.png" alt="sing up image"></figure>
+                        <a href="/login" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

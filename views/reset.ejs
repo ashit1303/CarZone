@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ -->    <title><%= pageTitle %></title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/reset.css">
+
+    <link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!-- Custom Theme files -->
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+   <!-- <meta name="keywords" content="Ramble Responsive web template, Bootstrap Web Templates, Flat Web Templates, Compatible web template" />-->
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!--animate-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="assets/js/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+</head>
+<body>
+        <% include partials/navbar.ejs %>
+
+    
+        <script>
+    
+    $(document).ready(function () {
+      setTimeout(function () {
+        $("#allAlert").css("display", "none");
+      }, 7000);
+    });
+  </script>
+        <% if (errorMessage) { %>
+            <div class="has-warning warner text-center" id="allAlert"><%= errorMessage %></div>
+        <% } %>
+        
+
+<div class="signout-content position-center">
+    <h2 class="form-title">Reset Password</h2>
+        <form class="form-group" action="/reset" method="POST">
+            <div >
+                <input class="new" required type="email"  name="email" placeholder="Email" id="email">
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn btn-danger" type="submit">Reset Password</button>
+        </form>
+
+</div>
+
+
+</div>

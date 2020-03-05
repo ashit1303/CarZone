@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title><%= pageTitle %></title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!-- Custom Theme files -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <meta name="keywords" content="Ramble Responsive web template, Bootstrap Web Templates, Flat Web Templates, Compatible web template" />-->
+
+
+
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!--animate-->
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="assets/js/wow.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+          setTimeout(function () {
+            $("#allAlert").css("display", "none");
+          }, 7000);
+        });
+      </script>
+    <% include partials/navbar.ejs %>
+    <% if (currentUser.username) { %>
+        <div class="has-warning warner text-center" id="allAlert"><a class="<%= path === '/cart' ? 'active' : '' %>">Logged in as <%= currentUser.username %></a></div>
+        <% } %>
+    <!--portfolio-->
+    <div class="portfolio" id="gallery">
+        <div class="container">
+            <h3 class="title">Available Cars</h3>
+
+    <main>
+        <% if (prods.length > 0) { %>
+            <% for (let product of prods) { %>
+                
+            <article class="col-md-3 card product-item wow">
+                <header class="card__header">
+                    <h1 class="product__title">
+                        <%= product.title %>
+                    </h1>
+                </header>
+                <div class="card__image">
+                    <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+                <div class="card__content">
+                    <h2 class="product__price">$
+                        <%= product.price %>
+                    </h2>
+                    <p class="product__description">
+                        <%= product.description %>
+                    </p>
+                </div>
+                <div class="card__actions">
+                    <form action="/create-order" method="POST">
+                        <input type="hidden" value="<%= product._id %>" name="productId">
+                        <button class="btn" type="submit">Purchase</button>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    </form>
+
+                </div>
+            </article>
+            <% } %>
+        </div>
+        <% } else { %>
+        <h1 class="title">No Products Found!</h1>
+        <% } %>
+    </main>
+
+</div>
+</div>
+
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
